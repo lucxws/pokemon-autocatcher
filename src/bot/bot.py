@@ -6,7 +6,7 @@ import json
 
 from src.pokemon.ia import PokemonIA
 
-class PokémonCatcher(commands.Bot):
+class PokemonCatcher(commands.Bot):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
