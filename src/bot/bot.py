@@ -76,11 +76,3 @@ class PokémonCatcher(commands.Bot):
         
     def run(self):
         super().run(self.token, bot=False)
-        
-        
-
-
-    
-        
-        
-        
