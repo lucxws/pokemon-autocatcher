@@ -1,3 +1,4 @@
+### Selfbot Class it has some useful functions.
 from discord.ext import commands
 
 import discord
