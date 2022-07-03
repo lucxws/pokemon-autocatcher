@@ -13,7 +13,7 @@ class PokemonCatcher(commands.Bot):
     
         self.pokemon_bot = 669228505128501258
         self.pokemon_prefix = 'p!'
-        
+        ### Change this if the Pokémon Bot prefix is different.
         
         self.ia = PokemonIA("database/pokemon.db")
         
