@@ -1,4 +1,6 @@
+## Database stuff
 from PIL import Image
+
 import imagehash
 import sqlite3
 import requests
