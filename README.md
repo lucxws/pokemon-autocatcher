@@ -1,5 +1,4 @@
-# pokemon-autocatcher
-# Discord Selfbot to catch pokémons automatically
+# Discord Selfbot to catch pokémons 
 # https://pokemonbot.com/
 
 # 💻Setup: 
