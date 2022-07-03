@@ -1,0 +1,17 @@
+id: the number of the pokémon
+
+pokemon_name
+    pokemon_name_it: italian name
+    pokemon_name_es: spanish name    
+    pokemon_name_de: german name   
+    pokemon_name_fr: french name
+    pokemon_name_cn: chinese name     
+    pokemon_name_kr: korean name    
+    pokemon_name_jp: japanese name
+
+image_hashes: perceptual hashes from the pokémon image extracted with "imagehash"
+
+
+Some pokémons only have a base name so if the desired prefered name doesn't exist, it will use the default one.
+All pokédex pokémons are included in the database.
+
