@@ -1,7 +1,7 @@
 ### Main file
-from src.bot.bot import PokémonCatcher
+from src.bot.bot import PokemonCatcher
 
-bot = PokémonCatcher(
+bot = PokemonCatcher(
     token='',
     ### your account token 
     command_prefix='ac!',
