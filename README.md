@@ -10,6 +10,6 @@
       - -B is to avoid creating __pycache__ folder
       
 # 💡The database contains all 905 pokémons from the dex.
-   - Go check database folder, it has all the information you need.
+   - Go check database folder, it has all the information you need to know.
     
 # ⚠It's only missing hisuians and shadows, they will be added soon
