@@ -1,7 +1,7 @@
 # 📢 Update Hisuians were added, overall there are 16 Hisuians Pokémons
 # ⚠ Shadows will be the next to be added.
 
-#Discord Selfbot to catch pokémons 
+# Discord Selfbot to catch pokémons 
 # https://pokemonbot.com/
 
 # 💻Setup: 
