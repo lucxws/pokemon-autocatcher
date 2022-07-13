@@ -5,7 +5,7 @@ bot = PokemonCatcher(
     token='',
     ### your account token 
     command_prefix='ac!',
-    ### for now there is not commands
+    ### for now there is no commands
     self_bot=True,
     ### setting to false it wont work anymore, make sure you are using discord.py 1.4.1 in order to work 
     pokemon_guilds=[],
