@@ -11,6 +11,6 @@
   - Open command prompt and type "python -B main.py"
       - -B is to avoid creating __pycache__ folder
       
-# 💡The database contains all 905 pokémons from the dex.
+# 💡The database contains all 905 pokémons from the dex + hisuians.
    - Go check database folder, it has all the information you need to know.
     
