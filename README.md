@@ -1,4 +1,7 @@
-# Discord Selfbot to catch pokémons 
+# 📢 Update Hisuians were added, overall there are 16 Hisuians Pokémons
+# ⚠ Shadows will be the next to be added.
+
+#Discord Selfbot to catch pokémons 
 # https://pokemonbot.com/
 
 # 💻Setup: 
@@ -11,4 +14,3 @@
 # 💡The database contains all 905 pokémons from the dex.
    - Go check database folder, it has all the information you need to know.
     
-# ⚠It's only missing hisuians and shadows, they will be added soon
