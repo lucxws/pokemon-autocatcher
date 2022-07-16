@@ -9,7 +9,7 @@
   - Download the packages by opening setup.bat
   - Edit the main.py file with your information
   - Open command prompt and type "python -B main.py"
-      - -B is to avoid creating __pycache__ folder
+      - -B disable pycache folder creation
       
 # 💡The database contains all 905 pokémons from the dex + hisuians.
    - Go check database folder, it has all the information you need to know.
