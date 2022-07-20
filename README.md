@@ -4,6 +4,8 @@
     - Selfbot command added "recog", send with an image from Pokémon bot to get some pokémon information.
     - "system_channel" is the channel to check the amount of shadow balls, more stuff will be added later on that channel.
  
+ # 🎦 Video preview & tutorial coming this week
+ 
 # Discord Selfbot to catch pokémons + Spam script
   - https://pokemonbot.com/
 
