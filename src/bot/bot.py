@@ -116,7 +116,7 @@ class PokemonCatcher(commands.Bot):
             if message.embeds:
                 if message.author.id == self.pokemon_bot:
                     await asyncio.sleep(4)
-                    if message.embeds[0].author.startswith(f'{self.user}\'s Inventory'):
+                    if message.embeds[0].author.name == f"{self.user.name}'s Inventory":
                         self.shadow_balls = self.get_shadow_balls(message.embeds[0].description)
                         print(f'[!] Shadow Balls: {self.shadow_balls}')
                         print('=============================================================')
