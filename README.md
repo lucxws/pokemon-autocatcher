@@ -5,7 +5,7 @@
     - "system_channel" is the channel to check the amount of shadow balls, more stuff will be added later on that channel.
  
 # Discord Selfbot to catch pokémons + Spam script
-# https://pokemonbot.com/
+  - https://pokemonbot.com/
 
 # 💻 Setup: 
   - Download Python 3.8.0 (with pip checked)
