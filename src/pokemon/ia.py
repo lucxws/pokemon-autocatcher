@@ -1,6 +1,4 @@
-## Database stuff
 from PIL import Image
-
 import imagehash
 import sqlite3
 import requests
@@ -44,11 +42,14 @@ class PokemonIA:
         VALUES ('{num}','{image_hashes}', '{name}', '{name_it}', '{name_es}', '{name_de}', '{name_fr}', '{name_cn}', '{name_kr}', '{name_jp}');
         """)
         self.connect.commit()
+    
+    def get_by_id(self, id):
+        self.cursor.execute("SELECT pokemon_name FROM 'Pokemon#8738' WHERE id = '{}'".format(id))
+        return self.cursor.fetchone()[0]
          
     
     def recognize_pokemon(self, hashes, name_type):  
 
-        
         __names__ = self.search_pokemon_name(hashes)
         
         name_dict = {
@@ -67,3 +68,13 @@ class PokemonIA:
             desired_name = name_dict.get("base")
         return desired_name
 
+    def get_information(self, hashes):
+        
+        self.cursor.execute(f"""
+        SELECT * FROM "Pokemon#8738"
+        WHERE image_hashes = '{hashes}';
+        """)
+        __information__ = self.cursor.fetchall()
+        return __information__
+        
+        

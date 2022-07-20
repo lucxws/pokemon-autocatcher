@@ -1,8 +1,8 @@
-### Code to get pokémon names and its languages its pretty useful I guess.
 import re
 
 def extract_name_from_title(title):
-    return re.sub(r'(.*?)\s', '', title)     
+    title = re.sub(r'(\d+|#|-|)', '', title) 
+    return re.sub(r'^\s+', '', title)   
 
 def extract_id(title):
     return re.findall(r'#(\d+)', title)[0]
