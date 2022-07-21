@@ -21,7 +21,7 @@ if __name__ == '__main__':
     info = token_info(token)
     print(f'[+] {info["username"]}#{info["discriminator"]} | {info["id"]}\n[!] Spam started, press Ctrl+C to stop.')
     while True:
-        spam_channel('')
+        spam_channel(channel)
 
     
 
