@@ -1,44 +1,44 @@
-from discord.ext import commands
-
-import discord
-import asyncio
 import os
 import re
 
+import discord
+import asyncio
+
+from discord.ext import commands
 from src.pokemon.ia import PokemonIA
 
 class PokemonCatcher(commands.Bot):
     
+    __langs__ = ["base", "italian", "spanish", "german", "french", "chinese", "korean", "japanese"]
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-    
-        self.pokemon_bot = 669228505128501258
-        self.pokemon_prefix = 'p!'
         
+        ### Ignore "ac!help"
         self.help_command = None
         
-        self.shadow_balls = 0        
-        self.ia = PokemonIA("database/pokemon.db")
-            
+        self.pokemon_bot = 669228505128501258
+        self.pokemon_prefix = 'p!'
+        self.shadow_balls = 0      
+        
+        self.ia = PokemonIA()
+        
+        ## User configuration
         self.token = kwargs.get('token')
         self.preferred_catch_type = kwargs.get('preferred_catch_type')
         self.system_channel = kwargs.get('system_channel')
         self.typing_enabled = kwargs.get('typing_enabled')
-        
-        self.available_languages = ["base", "italian", "spanish", "german", "french", "chinese", "korean", "japanese"]
-        
-        if self.preferred_catch_type not in self.available_languages:
-            raise ValueError(f'{self.preferred_catch_type} is not a valid catch type. Available languages: {self.available_languages}')
-        
         self.pokemon_guilds = kwargs.get('pokemon_guilds')
+        
+        if self.preferred_catch_type not in self.__langs__:
+            raise ValueError(f'{self.preferred_catch_type} is not a valid catch type. Available languages: {self.__langs__}')
+        
 
-
-    def get_shadow_balls(self, text: str):
+    def get_shadow_balls(self, text: str) -> int:
         text = text.splitlines()
         amount = re.findall(r'\d+', text[7])[1]
-        return amount
+        return int(amount)
         
-    
     def get_pokemon_name(self, text, user_id):
         text = re.sub(rf'Congratulations <@{user_id}>! you have caught a level', '', text)
         text = re.sub(r'Added to Pokédex.', '', text)
@@ -48,13 +48,12 @@ class PokemonCatcher(commands.Bot):
         return pokemon_fix
     
         
-    def is_shadow(self, pokemon: str):                    
+    def is_shadow(self, pokemon: str) -> bool:                    
         return True if pokemon.startswith('Shadow') else False
 
     async def is_valid_spawn(self, message: discord.Message):
-        
         if message.embeds:
-            if message.author.id == 669228505128501258:
+            if message.author.id == self.pokemon_bot:
                 if message.embeds[0].title == "A wild pokémon has аppeаred!":
                     return True
     
@@ -64,19 +63,12 @@ class PokemonCatcher(commands.Bot):
         chan = self.get_channel(self.system_channel)
         await chan.send('p!bag')
         
-
-    async def on_command_error(self, ctx: commands.Context, error: commands.CommandError):
-        
-        if isinstance(error, commands.CommandNotFound):
-           pass
-        
     
     async def on_message(self, message: discord.Message):
         
         channel = message.channel
-    
+        
         if message.guild.id in self.pokemon_guilds:
-            
             if (await self.is_valid_spawn(message)):
                 __hashes__ = self.ia.get_hashes(message.embeds[0].image.url)
                 name = self.ia.recognize_pokemon(__hashes__, self.preferred_catch_type)
@@ -110,19 +102,13 @@ class PokemonCatcher(commands.Bot):
                     pokemon_name = self.get_pokemon_name(message.content, self.user.id)
                     print(f'[>] Caught {pokemon_name}! In #{message.channel.name} | Guild: {message.guild.name}')
 
+
+
+
         if message.author.bot:
             return
         
         await self.process_commands(message)
         
-        
     def run(self):
         super().run(self.token, bot=False)
-        
-        
-
-
-    
-        
-        
-        
