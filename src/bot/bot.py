@@ -6,7 +6,6 @@ import os
 import re
 
 from src.pokemon.ia import PokemonIA
-from src.pokemon.shadow import ShadowSystem
 
 class PokemonCatcher(commands.Bot):
     
@@ -16,10 +15,9 @@ class PokemonCatcher(commands.Bot):
         self.pokemon_bot = 669228505128501258
         self.pokemon_prefix = 'p!'
         
-        self.shadow_balls = 0
-        self.shadow_system = ShadowSystem(self)
-
+        self.help_command = None
         
+        self.shadow_balls = 0        
         self.ia = PokemonIA("database/pokemon.db")
             
         self.token = kwargs.get('token')
@@ -27,24 +25,12 @@ class PokemonCatcher(commands.Bot):
         self.system_channel = kwargs.get('system_channel')
         self.typing_enabled = kwargs.get('typing_enabled')
         
-        self.available_names = ["base", "italian", "spanish", "german", "french", "chinese", "korean", "japanese"]
+        self.available_languages = ["base", "italian", "spanish", "german", "french", "chinese", "korean", "japanese"]
         
-        if self.preferred_catch_type not in self.available_names:
-            raise ValueError(f'{self.preferred_catch_type} is not a valid catch type. Available types: {self.available_names}')
+        if self.preferred_catch_type not in self.available_languages:
+            raise ValueError(f'{self.preferred_catch_type} is not a valid catch type. Available languages: {self.available_languages}')
         
         self.pokemon_guilds = kwargs.get('pokemon_guilds')
-
-
-    def load_cogs(self):
-        for file in os.listdir('src/bot/cogs'):
-            if file.endswith('.py'):
-                cog = file[:-3]
-                try:
-                    self.load_extension(f'src.bot.cogs.{cog}')
-                    print(f'[+] Successfully loaded {cog}')
-                except Exception as e:
-                    print(f'[+] Error reloading {cog}\n{e}')
-    
 
 
     def get_shadow_balls(self, text: str):
@@ -61,9 +47,10 @@ class PokemonCatcher(commands.Bot):
         pokemon_fix = re.sub(r'\s+$', '', pokemon)
         return pokemon_fix
     
+        
+    def is_shadow(self, pokemon: str):                    
+        return True if pokemon.startswith('Shadow') else False
 
-
-    
     async def is_valid_spawn(self, message: discord.Message):
         
         if message.embeds:
@@ -74,23 +61,20 @@ class PokemonCatcher(commands.Bot):
     async def on_connect(self):
         os.system('cls' if os.name == 'nt' else 'clear')
         print(f"[•] {self.user} | {self.user.id} | [{self.command_prefix}]\nCreated by lucwxs s2, enjoy :')\n=============================================================")
-        self.load_cogs()
         chan = self.get_channel(self.system_channel)
         await chan.send('p!bag')
         
 
-
     async def on_command_error(self, ctx: commands.Context, error: commands.CommandError):
         
         if isinstance(error, commands.CommandNotFound):
-            command = ctx.message.content.split()[0][len(self.command_prefix):]
-            print(f"[x] [{command}] is not a valid command, type {self.command_prefix}commands for a list of commands.")
+           pass
+        
     
     async def on_message(self, message: discord.Message):
         
         channel = message.channel
     
-                                
         if message.guild.id in self.pokemon_guilds:
             
             if (await self.is_valid_spawn(message)):
@@ -101,17 +85,16 @@ class PokemonCatcher(commands.Bot):
                     if self.typing_enabled:
                         async with channel.typing():
                             pass
-                        
-                    if self.shadow_system.is_shadow(name) and self.shadow_balls > 0:               
-                        await channel.send(f'{self.pokemon_prefix}c {name.lower()}')
-                        self.shadow_balls -= 1
-                        
-                    if not self.shadow_system.is_shadow(name):
-                        await channel.send(f'{self.pokemon_prefix}c {name.lower()}')
-                    
-                    if self.shadow_system.is_shadow(name) and self.shadow_balls == 0:
-                        print(f'[!] A wild {name} has appeared but has not been caught because you have no shadow balls.\n[!] In #{message.channel.name} | Guild: {message.guild.name}')
 
+                    if self.is_shadow(name):
+                        if self.shadow_balls > 0:               
+                            await channel.send(f'{self.pokemon_prefix}c {name.lower()}')
+                            self.shadow_balls -= 1
+                        elif self.shadow_balls < 1:
+                            print(f'[!] A wild {name} has appeared but has not been caught because you have no shadow balls.\n[!] In #{message.channel.name} | Guild: {message.guild.name}')
+                            
+                    if not self.is_shadow(name):
+                        await channel.send(f'{self.pokemon_prefix}c {name.lower()}')
                     
             if message.embeds:
                 if message.author.id == self.pokemon_bot:
