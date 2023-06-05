@@ -3,8 +3,8 @@ import requests
 import random
 import time
 
-token = 'ENTER ACCOUNT TOKEN HERE'
-channel = 'ENTER CHANNEL ID HERE'
+token = 'MTExMDk1NjE5ODY3NDU2NzI0MQ.Gz6FGT.FDqVSne1ChQz-gNntC3CkwKIY_i4lKsC-iEtps'
+channel = '1087900461257982047'
 
 
 def spam_channel(channel_id: str):
